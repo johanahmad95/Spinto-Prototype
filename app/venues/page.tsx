@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Navbar, Footer } from '@/components/layout';
@@ -79,7 +80,7 @@ function mapSupabaseCourt(row: Record<string, unknown>, venueId: string): Court 
 
 type VenueWithCourt = { venue: Venue; court: Court; courts: Court[] };
 
-export default function VenuesPage() {
+function VenuesContent() {
   const searchParams = useSearchParams();
   const [venues, setVenues] = useState<VenueWithCourt[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -539,5 +540,15 @@ export default function VenuesPage() {
 
       <Footer />
     </main>
+  );
+}
+
+export const dynamic = 'force-dynamic';
+
+export default function VenuesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-500">Loading...</div>}>
+      <VenuesContent />
+    </Suspense>
   );
 }
