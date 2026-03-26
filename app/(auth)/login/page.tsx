@@ -1,7 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -10,7 +9,7 @@ import { Button3D, Card3D } from '@/components/ui';
 import { Input3D } from '@/components/ui/Input3D';
 import { createClient } from '@/lib/supabase/client';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +23,6 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
-    // Check if user just registered
     if (searchParams.get('registered') === 'true') {
       setSuccessMessage('Account created successfully! Please sign in.');
     }
@@ -37,18 +35,15 @@ export default function LoginPage() {
     setSuccessMessage('');
     
     try {
-      // Check if Supabase is configured
       if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
         setError('Supabase is not configured. Please check your environment variables.');
         setIsLoading(false);
         return;
       }
 
-      // Use localStorage if "Remember Me" is checked, otherwise sessionStorage
       const storage = rememberMe ? window.localStorage : window.sessionStorage;
       const supabase = createClient(storage);
 
-      // Sign in the user
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
@@ -61,7 +56,6 @@ export default function LoginPage() {
       }
 
       if (data.user) {
-        // Successful login - redirect to home
         router.push('/');
         router.refresh();
       }
@@ -195,5 +189,13 @@ export default function LoginPage() {
         </Card3D>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
