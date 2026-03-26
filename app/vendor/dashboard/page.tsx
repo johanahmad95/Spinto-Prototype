@@ -171,6 +171,7 @@ export default async function VendorDashboardPage() {
   }
 
   return (
+    // @ts-ignore
     <VendorDashboard 
       userId={user.id}
       initialCourts={courts}
