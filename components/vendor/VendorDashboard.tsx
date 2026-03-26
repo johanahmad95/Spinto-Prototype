@@ -52,12 +52,11 @@ export function VendorDashboard({
   initialCourts,
   initialVenues,
   initialBookings,
-}: VendorDashboardProps) {
-  // 2. FIX STATE SEEDING: strictly from server props
-  const [courts] = useState<Court[]>(initialCourts);
-  const [venues] = useState<Venue[]>(initialVenues);
+}: Partial<VendorDashboardProps>) {
+  const [courts] = useState<Court[]>(initialCourts ?? []);
+  const [venues] = useState<Venue[]>(initialVenues ?? []);
   const [bookings, setBookings] = useState<BookingRow[]>(
-    initialBookings.slice(-MAX_BOOKINGS),
+    (initialBookings ?? []).slice(-MAX_BOOKINGS),
   );
 
   // Single Supabase client for realtime (avoid creating inside effect)
@@ -65,20 +64,20 @@ export function VendorDashboard({
   const courtIdsRef = useRef<string[]>([]);
   const courtsRef = useRef<Court[]>([]);
   const venuesRef = useRef<Venue[]>([]);
-  courtIdsRef.current = courts.map((c) => c.id);
-  courtsRef.current = courts;
-  venuesRef.current = venues;
+  courtIdsRef.current = (courts ?? []).map((c) => c.id);
+  courtsRef.current = courts ?? [];
+  venuesRef.current = venues ?? [];
 
   const { addNotification } = useVendorNotification() ?? { addNotification: undefined };
 
   const venueNameById = useMemo(
-    () => new Map(venues.map((v) => [v.id, v.name])),
+    () => new Map((venues ?? []).map((v) => [v.id, v.name])),
     [venues],
   );
   const courtVenueById = useMemo(
     () =>
       new Map(
-        courts.map((c) => [c.id, (c.venue_id ? venueNameById.get(c.venue_id) : undefined) ?? c.venue_name ?? '']),
+        (courts ?? []).map((c) => [c.id, (c.venue_id ? venueNameById.get(c.venue_id) : undefined) ?? c.venue_name ?? '']),
       ),
     [courts, venueNameById],
   );
@@ -170,13 +169,13 @@ export function VendorDashboard({
     };
   }, [userId, supabase, addNotification]);
 
-  // 1. DATA VALIDATION: no userId = session still loading
+  // No userId = session still loading
   if (!userId) {
     return <div className="p-6 text-sm text-gray-600">Loading session...</div>;
   }
 
-  // 4. ERROR BOUNDARY: distinguish auth vs data error
-  if (courts.length === 0) {
+  // No courts yet — show a friendly empty state instead of crashing
+  if ((courts ?? []).length === 0) {
     return (
       <div className="p-6 text-sm text-amber-700">
         No data received from server. Check that courts are linked to your vendor account.
@@ -185,7 +184,8 @@ export function VendorDashboard({
   }
 
   const today = new Date().toISOString().split('T')[0];
-  const validBookings = bookings.filter((b) => b.status !== 'cancelled');
+  const safeBookings: BookingRow[] = bookings ?? [];
+  const validBookings = safeBookings.filter((b) => b.status !== 'cancelled');
   const revenueBookings = validBookings.filter((b) =>
     ['paid', 'confirmed', 'completed'].includes(b.status),
   );
@@ -198,11 +198,11 @@ export function VendorDashboard({
       b.booking_date === today &&
       ['pending', 'confirmed', 'paid'].includes(b.status),
   ).length;
-  const totalSlotsToday = courts.length * 17;
+  const totalSlotsToday = (courts ?? []).length * 17;
   const occupancyRate =
     totalSlotsToday > 0 ? (activeBookingsToday / totalSlotsToday) * 100 : 0;
 
-  const feedItems: BookingFeedItem[] = [...bookings]
+  const feedItems: BookingFeedItem[] = [...safeBookings]
     .sort((a, b) => {
       const aAt = a.created_at ? new Date(a.created_at).getTime() : 0;
       const bAt = b.created_at ? new Date(b.created_at).getTime() : 0;
@@ -210,11 +210,11 @@ export function VendorDashboard({
     })
     .slice(0, 24)
     .map((b) => {
-      const courtName = courts.find((c) => c.id === b.court_id)?.name ?? 'Court';
-      const court = courts.find((c) => c.id === b.court_id);
-      const venueByVenueId = court ? venues.find((v) => v.id === court.venue_id)?.name : null;
+      const courtName = (courts ?? []).find((c) => c.id === b.court_id)?.name ?? 'Court';
+      const court = (courts ?? []).find((c) => c.id === b.court_id);
+      const venueByVenueId = court ? (venues ?? []).find((v) => v.id === court.venue_id)?.name : null;
       const venueName = (b.venues?.name ?? b.venue_name ?? venueByVenueId ?? courtVenueById.get(b.court_id))?.trim() || 'Unknown Venue';
-      const venue = court ? venues.find((v) => v.id === court.venue_id) : null;
+      const venue = court ? (venues ?? []).find((v) => v.id === court.venue_id) : null;
       const address = venue?.address?.trim() || '';
       const duration =
         typeof b.duration === 'number'
