@@ -126,7 +126,7 @@ const SportFilter = ({
               key={sport}
               onClick={() => onSelectSport(sport)}
               className={cn(
-                'group relative flex flex-col items-center gap-1.5 md:gap-2 min-w-[56px] md:min-w-[64px] py-2 transition-all duration-200 flex-shrink-0',
+                'group relative flex flex-col items-center gap-1.5 md:gap-2 min-w-[56px] md:min-w-[64px] py-2 transition-all duration-200 flex-shrink-0 cursor-pointer',
               )}
             >
               {/* Icon - slightly smaller on mobile */}

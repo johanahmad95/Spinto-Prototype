@@ -5,9 +5,8 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Navbar, Footer } from '@/components/layout';
 import { SportFilter, Card3D, VenueCard } from '@/components/ui';
-import { Select3D } from '@/components/ui/Input3D';
+import BookingSearchBar from '@/components/home/BookingSearchBar';
 import { SportType, AREA_INFO, KlangValleyArea, Venue, Court } from '@/lib/types';
-import { Search, MapPin, SlidersHorizontal, Locate } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { getUserLocation } from '@/lib/geolocation';
 import { toast } from 'sonner';
@@ -388,104 +387,55 @@ function VenuesContent() {
 
   return (
     <main className="min-h-screen bg-cream">
-      <Navbar />
-      
-      {/* Header */}
-      <section className="pt-24 pb-8 bg-gradient-to-b from-apricot-light to-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
-              Find Your Perfect Court
-            </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Explore sports courts across Klang Valley. Filter by sport type and location 
-              to find the perfect venue for your next game.
-            </p>
-          </div>
+      {/* Solid navbar backdrop — sits behind the fixed transparent nav (z-50) to give it
+          a cream background on this page without touching the global component */}
+      <div className="hidden md:block fixed top-0 left-0 right-0 h-24 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm z-40" />
 
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search venues by name or location..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-14 py-4 rounded-2xl bg-white
-                  shadow-[4px_4px_12px_rgba(0,0,0,0.08),-3px_-3px_10px_rgba(255,255,255,0.9)]
-                  border border-gray-100 text-gray-800 placeholder:text-gray-400
-                  focus:outline-none focus:ring-2 focus:ring-vista-blue/30"
-              />
-              <button
-                type="button"
-                onClick={handleFindNearMe}
-                disabled={isLoadingNearby}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full text-gray-500 hover:text-tomato hover:bg-tomato/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                title="Find courts near me"
-              >
-                <Locate className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
+      <Navbar />
+
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      {/* mt-20 on desktop pushes the hero image below the navbar strip so it
+          is fully visible and not hidden behind the nav */}
+      <section className="relative h-[380px] md:h-[440px] md:mt-20 flex flex-col justify-center overflow-hidden">
+        {/* Background image — natural, no heavy filter */}
+        <img
+          src="/was-ist-futsal.jpg"
+          alt="Sports court"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Very subtle white wash — just enough to lift contrast without fading the photo */}
+        <div className="absolute inset-0 bg-white/10" />
+
       </section>
+
+      {/* ── Overlapping Search Bar — z-30 keeps it above hero but below nav (z-40/50) */}
+      <div className="relative z-30 -mt-10">
+        <BookingSearchBar />
+      </div>
 
       {/* Filters & Results */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filters Row */}
-          <Card3D variant="clay" padding="md" className="mb-8">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-              <div className="flex items-center gap-2 text-gray-600">
-                <SlidersHorizontal className="w-5 h-5" />
-                <span className="font-medium">Filters:</span>
-              </div>
-              
-              <div className="flex-1">
-                <p className="text-sm text-gray-500 mb-2 lg:hidden">Sport Type:</p>
-                <SportFilter
-                  selectedSport={selectedCategory === 'All' ? 'all' : (selectedCategory as SportType)}
-                  onSelectSport={(s) => {
-                    if (s === 'all') {
-                      setSelectedCategory('All');
-                      setSelectedArea('all');
-                      setSearchQuery('');
-                      setIsNearbyMode(false);
-                    } else {
-                      setSelectedCategory(s);
-                    }
-                  }}
-                />
-              </div>
+          {/* Sport Filter — no card wrapper, matches homepage style */}
+          <div className="mb-8">
+            <SportFilter
+              selectedSport={selectedCategory === 'All' ? 'all' : (selectedCategory as SportType)}
+              onSelectSport={(s) => {
+                if (s === 'all') {
+                  setSelectedCategory('All');
+                  setSelectedArea('all');
+                  setSearchQuery('');
+                  setIsNearbyMode(false);
+                } else {
+                  setSelectedCategory(s);
+                }
+              }}
+            />
+          </div>
 
-              <div className="w-full lg:w-64">
-                <p className="text-sm text-gray-500 mb-2 lg:hidden">Location:</p>
-                <Select3D
-                  icon={<MapPin className="w-5 h-5" />}
-                  options={areaOptions}
-                  value={selectedArea}
-                  onChange={(e) => setSelectedArea(e.target.value as KlangValleyArea | 'all')}
-                  className="w-full min-h-[48px] md:min-h-0"
-                />
-              </div>
-            </div>
-          </Card3D>
-
-          {/* Results Count */}
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-gray-600">
-              {isLoadingNearby ? (
-                'Finding courts near you...'
-              ) : isLoadingList ? (
-                'Loading courts...'
-              ) : (
-                <>
-                  <span className="font-semibold text-gray-800">{displayVenues.length}</span> venues found
-                </>
-              )}
-            </p>
-            {(showClearButton || isNearbyMode) && (
+          {/* Clear filters — only shown when a filter is active */}
+          {(showClearButton || isNearbyMode) && (
+            <div className="flex justify-end mb-4">
               <button
                 onClick={() => {
                   setSelectedCategory('All');
@@ -497,8 +447,8 @@ function VenuesContent() {
               >
                 Clear all filters
               </button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Venues Grid */}
           {isLoadingNearby ? (

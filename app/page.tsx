@@ -3,16 +3,15 @@ import { AnimatedHeroBanner, FeaturedCourts, HowItWorks, BookingSearchBar } from
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pb-32 md:pb-0">
       <Navbar />
-      {/* Mobile: bottom padding for floating dock, Desktop: no extra padding (navbar handles it) */}
-      <div className="pb-32 md:pb-0 px-4 sm:px-6">
-        <AnimatedHeroBanner />
-        <BookingSearchBar />
-        <FeaturedCourts />
-        <HowItWorks />
-        <Footer />
-      </div>
+      {/* Hero & search bar are full-width — no horizontal padding here */}
+      <AnimatedHeroBanner />
+      <BookingSearchBar />
+      {/* Content sections have their own internal padding */}
+      <FeaturedCourts />
+      <HowItWorks />
+      <Footer />
     </main>
   );
 }

@@ -55,7 +55,7 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="text-white space-y-5">
             <Badge3D variant="glow" color="chartreuse" className="animate-pulse-glow">
-              Welcome to Sprint
+              Welcome to Sprinto
             </Badge3D>
             
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">

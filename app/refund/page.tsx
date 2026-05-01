@@ -2,8 +2,8 @@ import { Navbar, Footer } from '@/components/layout';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Refund & Cancellation Policy | Sprint',
-  description: 'Sprint Refund and Cancellation Policy - Learn about our booking cancellation and refund terms.',
+  title: 'Refund & Cancellation Policy | Sprinto',
+  description: 'Sprinto Refund and Cancellation Policy - Learn about our booking cancellation and refund terms.',
 };
 
 export default function RefundPage() {
@@ -50,7 +50,7 @@ export default function RefundPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">5. Contact Us</h2>
               <p>
-                For refund or cancellation enquiries, please contact us at support@sprint.my.
+                For refund or cancellation enquiries, please contact us at support@sprinto.my.
               </p>
             </section>
           </article>

@@ -1,4 +1,4 @@
-# Sprint - Setup Guide
+# Sprinto - Setup Guide
 
 ## 1. Add Court Images
 
@@ -55,7 +55,7 @@ Get these values from: **Project Settings > API**
 npm run dev
 ```
 
-Open [http://localhost:3002](http://localhost:3002) to view Sprint.
+Open [http://localhost:3002](http://localhost:3002) to view Sprinto.
 
 ## Project Structure
 

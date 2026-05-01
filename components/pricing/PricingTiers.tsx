@@ -72,7 +72,7 @@ const PricingTiers = () => {
         <div className="text-center mb-12">
           <p className="text-sm font-medium text-tomato mb-2">Membership Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            Join Sprint today and enjoy exclusive benefits
+            Join Sprinto today and enjoy exclusive benefits
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             designed to enhance your sports experience.

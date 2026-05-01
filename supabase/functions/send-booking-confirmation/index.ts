@@ -28,7 +28,7 @@ serve(async (req) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Sprint Bookings <onboarding@resend.dev>", // Replace with your verified domain once set up
+        from: "Sprinto Bookings <onboarding@resend.dev>", // Replace with your verified domain once set up
         to: [record.customer_email],
         subject: `Booking Confirmed: ${record.court_name}`,
         html: `
@@ -50,7 +50,7 @@ serve(async (req) => {
             </p>
 
             <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
-            <p style="color: #aaa; font-size: 12px;">Sprint – Book Sports Courts in Klang Valley</p>
+            <p style="color: #aaa; font-size: 12px;">Sprinto – Book Sports Courts in Klang Valley</p>
           </div>
         `,
       }),

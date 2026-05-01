@@ -2,8 +2,8 @@ import { Navbar, Footer } from '@/components/layout';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Terms of Service | Sprint',
-  description: 'Sprint Terms of Service - Legal terms governing the use of our sports court booking platform.',
+  title: 'Terms of Service | Sprinto',
+  description: 'Sprinto Terms of Service - Legal terms governing the use of our sports court booking platform.',
 };
 
 export default function TermsPage() {
@@ -22,14 +22,14 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">1. Acceptance of Terms</h2>
               <p>
-                By accessing or using Sprint&apos;s platform, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.
+                By accessing or using Sprinto&apos;s platform, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">2. Use of Service</h2>
               <p>
-                Sprint provides a platform for booking sports courts in Klang Valley. You agree to use the service only for lawful purposes and in accordance with these terms. You must provide accurate information when creating an account and making bookings.
+                Sprinto provides a platform for booking sports courts in Klang Valley. You agree to use the service only for lawful purposes and in accordance with these terms. You must provide accurate information when creating an account and making bookings.
               </p>
             </section>
 
@@ -50,7 +50,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">5. Limitation of Liability</h2>
               <p>
-                Sprint acts as an intermediary between users and venues. We are not liable for disputes between users and venues, or for any loss or damage arising from your use of booked facilities.
+                Sprinto acts as an intermediary between users and venues. We are not liable for disputes between users and venues, or for any loss or damage arising from your use of booked facilities.
               </p>
             </section>
 
@@ -64,7 +64,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">7. Contact</h2>
               <p>
-                For questions about these Terms of Service, contact us at legal@sprint.my.
+                For questions about these Terms of Service, contact us at legal@sprinto.my.
               </p>
             </section>
           </article>

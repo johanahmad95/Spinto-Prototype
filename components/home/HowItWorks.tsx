@@ -6,23 +6,23 @@ import { Card3D } from '@/components/ui';
 const STEPS = [
   {
     icon: Search,
-    title: 'Find a Court Near You',
-    description: 'Start by selecting your preferred location from our extensive list of available courts across Klang Valley.',
+    title: 'Find',
+    description: 'Pick your venue in Klang Valley.',
   },
   {
     icon: UserCheck,
-    title: 'Provide Personal Info',
-    description: 'Fill in your personal information including name, email address, and phone number to complete your profile.',
+    title: 'Profile',
+    description: 'Quick sign-up to get started.',
   },
   {
     icon: CreditCard,
-    title: 'Confirm and Pay',
-    description: 'Choose your preferred payment method and enter the necessary details securely. Single payment, no split bills.',
+    title: 'Secure',
+    description: 'One-tap, secure payment.',
   },
   {
     icon: Trophy,
-    title: 'Enjoy Your Game',
-    description: 'Enjoy your game with top-notch facilities. Show up, play, and have a fantastic sports experience!',
+    title: 'Play',
+    description: 'Show up and hit the court.',
   },
 ];
 
@@ -31,14 +31,13 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-20 bg-white">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-sm font-medium text-tomato mb-2">How It Works</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            Easily Book Your Ideal Court
+        <div className="mb-12">
+          <h2
+            className="text-4xl sm:text-5xl font-extrabold text-slate-800"
+            style={{ fontFamily: 'var(--font-nunito), "Nunito", sans-serif' }}
+          >
+            Sprinto the court.
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            in Just a Few Simple and Convenient Steps
-          </p>
         </div>
 
         {/* Steps Grid */}
@@ -49,7 +48,7 @@ const HowItWorks = () => {
               variant="clay"
               hover="lift"
               padding="lg"
-              className="text-center group"
+              className="text-center group cursor-pointer"
             >
               {/* Icon Container */}
               <div className="relative inline-flex mb-6">

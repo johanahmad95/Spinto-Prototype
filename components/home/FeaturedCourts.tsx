@@ -141,26 +141,13 @@ const FeaturedCourts = () => {
     <section className="pt-12 pb-20 bg-cream" style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 flex flex-col items-center text-center">
-          {/* Main heading */}
+        <div className="mb-6">
           <h2
-            className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold text-gray-900 mb-3 leading-tight"
-            style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}
+            className="text-4xl font-extrabold text-slate-800"
+            style={{ fontFamily: 'var(--font-nunito), "Nunito", sans-serif' }}
           >
-            Book Klang Valley&apos;s
-            <span className="block bg-gradient-to-r from-tomato via-vista-blue to-teal-dark bg-clip-text text-transparent">
-              top-rated courts in seconds
-            </span>
+            Play Now.
           </h2>
-
-          {/* Subheading */}
-          <p
-            className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto"
-            style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}
-          >
-            Curated venues with great lighting, pro-grade surfaces, and easy parking —
-            so you can focus on the game, not the logistics.
-          </p>
         </div>
 
         {/* Filters */}

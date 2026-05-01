@@ -2,8 +2,8 @@ import { Navbar, Footer } from '@/components/layout';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Privacy Policy | Sprint',
-  description: 'Sprint Privacy Policy - How we collect, use, and protect your personal information.',
+  title: 'Privacy Policy | Sprinto',
+  description: 'Sprinto Privacy Policy - How we collect, use, and protect your personal information.',
 };
 
 export default function PrivacyPage() {
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-3">5. Contact Us</h2>
               <p>
-                If you have questions about this Privacy Policy or your personal data, please contact us at privacy@sprint.my.
+                If you have questions about this Privacy Policy or your personal data, please contact us at privacy@sprinto.my.
               </p>
             </section>
           </article>

@@ -126,13 +126,13 @@ export default function SignUpPage() {
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-tomato to-tomato-dark flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">S</span>
           </div>
-          <span className="text-2xl font-bold text-gray-800">Sprint</span>
+          <span className="text-2xl font-bold text-slate-800">Sprinto</span>
         </Link>
 
         <Card3D variant="glass" padding="lg">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-gray-800 mb-2">Create Your Account</h1>
-            <p className="text-gray-500">Join Sprint and start booking courts today</p>
+            <p className="text-slate-800">Join Sprinto and start booking courts today</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">

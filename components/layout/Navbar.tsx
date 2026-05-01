@@ -58,7 +58,7 @@ const Navbar = () => {
   const logo = {
     text: 'Sprinto',
     url: '/',
-    image: '/sprinto-logo.png?v=3',
+    image: '/sprinto-final.png?v=1',
   };
 
   const auth = {

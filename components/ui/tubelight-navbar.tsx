@@ -19,6 +19,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+} from "@/components/ui/dialog"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Button } from "@/components/ui/button"
 import { AuthDropdownForm } from "@/components/auth/AuthDropdownForm"
 
@@ -55,6 +61,8 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
   const [user, setUser] = useState<any>(null)
   const [fullName, setFullName] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [mobileAuthOpen, setMobileAuthOpen] = useState(false)
+  const [desktopAuthOpen, setDesktopAuthOpen] = useState(false)
 
   // Fetch profile full_name when user is set
   useEffect(() => {
@@ -155,22 +163,24 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
           <div className="flex items-center justify-between gap-4">
             {/* Logo Section */}
             {logo && (
-              <div className="flex items-center bg-white/10 border border-white/20 backdrop-blur-lg py-1 px-3 rounded-full">
-                <Link href={logo.url} className="flex items-center gap-2 flex-shrink-0">
-                  {logo.image ? (
-                    <img src={logo.image} alt={logo.text} className="h-9 w-auto object-contain max-w-[120px] bg-transparent" />
-                  ) : (
-                    <>
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-teal-dark to-teal-medium flex items-center justify-center shadow-md border-2 border-chartreuse">
-                        <span className="text-white font-bold text-lg">S</span>
-                      </div>
-                      <span className="text-lg font-bold text-gray-800">
-                        {logo.text}
-                      </span>
-                    </>
-                  )}
-                </Link>
-              </div>
+              <Link href={logo.url} className="flex items-center flex-shrink-0">
+                {logo.image ? (
+                  <img
+                    src={logo.image}
+                    alt="Sprinto Logo - Your Court One Tap"
+                    className="h-10 md:h-12 w-auto object-contain bg-transparent"
+                  />
+                ) : (
+                  <>
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-teal-dark to-teal-medium flex items-center justify-center shadow-md border-2 border-chartreuse">
+                      <span className="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span className="text-lg font-bold text-slate-800">
+                      {logo.text}
+                    </span>
+                  </>
+                )}
+              </Link>
             )}
 
             {/* Navigation Items with Tubelight Effect */}
@@ -218,7 +228,7 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
             {auth && !loading && (
               <div className="flex items-center flex-shrink-0">
                 {!user ? (
-                  <Popover modal={false}>
+                  <Popover open={desktopAuthOpen} onOpenChange={setDesktopAuthOpen}>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
@@ -229,8 +239,8 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
                         Account
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent align="end" className="w-[90vw] sm:w-[350px] bg-white opacity-100 border-2 border-gray-100 shadow-2xl p-0">
-                      <AuthDropdownForm />
+                    <PopoverContent align="end" className="w-[380px] bg-white border-2 border-gray-100 shadow-2xl rounded-2xl p-0">
+                      <AuthDropdownForm onClose={() => setDesktopAuthOpen(false)} />
                     </PopoverContent>
                   </Popover>
                 ) : (
@@ -293,17 +303,21 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
       {/* Mobile Navbar - Floating Bottom Dock */}
       <div
         className={cn(
-          "md:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4",
+          "md:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[380px]",
           className,
         )}
       >
         {/* Single Floating Dock Container */}
-        <div className="flex items-center justify-between h-16 px-6 bg-white border border-gray-100 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <div className="flex items-center justify-between h-16 px-5 bg-white border border-gray-100 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           {/* Logo Section - Left */}
           {logo && (
-            <Link href={logo.url} className="flex items-center gap-2 flex-shrink-0">
+            <Link href={logo.url} className="flex items-center flex-shrink-0">
               {logo.image ? (
-                <img src={logo.image} alt={logo.text} className="h-8 w-auto object-contain bg-transparent" />
+                <img
+                  src={logo.image}
+                  alt="Sprinto Logo - Your Court One Tap"
+                  className="h-10 w-auto object-contain bg-transparent"
+                />
               ) : (
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-dark to-teal-medium flex items-center justify-center shadow-md border-2 border-chartreuse">
                   <span className="text-white font-bold text-sm">S</span>
@@ -313,7 +327,7 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
           )}
 
           {/* Navigation Items - Center */}
-          <div className="flex items-center gap-6">
+          <div className="flex flex-1 items-center justify-center gap-6">
             {items.map((item) => {
               const Icon = item.icon
               const isActive = activeTab === item.name
@@ -339,17 +353,27 @@ export function NavBar({ items, className, logo, auth }: NavBarProps) {
           {auth && !loading && (
             <div className="flex items-center">
               {!user ? (
-                <Popover modal={false}>
-                  <PopoverTrigger asChild>
-                    <button className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-                      <User className="w-5 h-5" />
-                      Account
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent align="end" side="top" className="w-[90vw] sm:w-[350px] bg-white opacity-100 border-2 border-gray-100 shadow-2xl p-0">
-                    <AuthDropdownForm />
-                  </PopoverContent>
-                </Popover>
+                <>
+                  <button
+                    onClick={() => setMobileAuthOpen(true)}
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                  >
+                    <User className="w-5 h-5" />
+                    Account
+                  </button>
+
+                  <Dialog open={mobileAuthOpen} onOpenChange={setMobileAuthOpen}>
+                    <DialogPortal>
+                      <DialogOverlay />
+                      <DialogPrimitive.Content
+                        className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-md rounded-2xl bg-white border border-gray-100 shadow-2xl p-0 focus:outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+                      >
+                        <DialogPrimitive.Title className="sr-only">Sign in or create account</DialogPrimitive.Title>
+                        <AuthDropdownForm onClose={() => setMobileAuthOpen(false)} />
+                      </DialogPrimitive.Content>
+                    </DialogPortal>
+                  </Dialog>
+                </>
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

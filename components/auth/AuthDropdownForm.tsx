@@ -10,9 +10,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { PopoverClose } from "@/components/ui/popover"
 import { createClient } from "@/lib/supabase/client"
 import { cn } from "@/lib/utils"
+
+interface AuthDropdownFormProps {
+  onClose?: () => void
+}
 
 const signUpSchema = z
   .object({
@@ -26,7 +29,7 @@ const signUpSchema = z
     path: ["confirmPassword"],
   })
 
-export function AuthDropdownForm() {
+export function AuthDropdownForm({ onClose }: AuthDropdownFormProps = {}) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
@@ -171,19 +174,24 @@ export function AuthDropdownForm() {
 
   return (
     <div
-      className="w-full p-4 relative"
+      className="w-full px-5 py-6 relative"
       onKeyDown={(e) => e.stopPropagation()}
       onPointerDown={(e) => e.stopPropagation()}
     >
-      <PopoverClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
-      </PopoverClose>
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none"
+        >
+          <X className="h-4 w-4" />
+          <span className="sr-only">Close</span>
+        </button>
+      )}
 
-      <Tabs defaultValue="signin" className="w-full mt-6">
-        <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="signin">Sign In</TabsTrigger>
-          <TabsTrigger value="signup">Sign Up</TabsTrigger>
+      <Tabs defaultValue="signin" className="w-full mt-2">
+        <TabsList className="flex w-full mb-5 bg-gray-100 rounded-xl p-1">
+          <TabsTrigger value="signin" className="flex-1 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-gray-500 data-[state=active]:text-gray-900 font-medium transition-all">Sign In</TabsTrigger>
+          <TabsTrigger value="signup" className="flex-1 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-gray-500 data-[state=active]:text-gray-900 font-medium transition-all">Sign Up</TabsTrigger>
         </TabsList>
         
         <TabsContent value="signin">

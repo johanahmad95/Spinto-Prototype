@@ -515,12 +515,12 @@ export default function VendorDashboardLayout({
         <aside className="hidden w-64 flex-col border-r border-gray-100 bg-white/90 px-4 py-6 md:flex">
           <div className="mb-8 flex items-center gap-2">
             <img
-              src="/sprinto-logo.png?v=3"
-              alt="Sprinto"
+              src="/sprinto-final.png?v=1"
+              alt="Sprinto Logo - Your Court One Tap"
               className="h-9 w-9 object-contain object-center"
             />
             <div className="leading-tight">
-              <div className="text-sm font-semibold">Sprinto</div>
+              <div className="text-sm font-semibold text-slate-800">Sprinto</div>
               <div className="text-xs text-gray-500">Vendor Console</div>
             </div>
           </div>

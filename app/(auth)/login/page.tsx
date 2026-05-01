@@ -79,7 +79,7 @@ function LoginForm() {
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-tomato to-tomato-dark flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">S</span>
           </div>
-          <span className="text-2xl font-bold text-gray-800">Sprint</span>
+          <span className="text-2xl font-bold text-slate-800">Sprinto</span>
         </Link>
 
         <Card3D variant="glass" padding="lg">

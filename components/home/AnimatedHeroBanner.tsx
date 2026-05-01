@@ -561,7 +561,7 @@ const AnimatedHeroBanner: React.FC = () => {
                 <span className="text">{currentText}</span>
               </h1>
               <p>Book premium sports courts across Klang Valley. Pickleball, Padel, Tennis, and more — all in one place.</p>
-              
+
               <Link href="/venues" className="book-link">
                 <span className="linktext">Explore Courts</span>
                 <span className="arrow">

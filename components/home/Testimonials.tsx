@@ -6,7 +6,7 @@ import { Quote } from 'lucide-react';
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Sprint makes booking a court so easy and convenient. The facilities are top-notch, and I love the flexibility of the membership plans.",
+    quote: "Sprinto makes booking a court so easy and convenient. The facilities are top-notch, and I love the flexibility of the membership plans.",
     author: "Jerome Bell",
     role: "Regular Pickleball Player",
     avatar: "JB",
@@ -20,7 +20,7 @@ const TESTIMONIALS = [
   },
   {
     id: 3,
-    quote: "The padel courts at Ace Padel Club are world-class. Sprint helped me discover this amazing venue just 10 minutes from my home!",
+    quote: "The padel courts at Ace Padel Club are world-class. Sprinto helped me discover this amazing venue just 10 minutes from my home!",
     author: "Ahmad Rahman",
     role: "Padel Club Member",
     avatar: "AR",
@@ -35,7 +35,7 @@ const Testimonials = () => {
         <div className="mb-12">
           <p className="text-sm font-medium text-tomato mb-2">What Our Members Say</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 max-w-lg">
-            See what our satisfied members have to say about their experience with Sprint.
+            See what our satisfied members have to say about their experience with Sprinto.
           </h2>
         </div>
 

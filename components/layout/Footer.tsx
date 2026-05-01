@@ -7,9 +7,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-white hover:text-gray-200">
-              <img src="/sprinto-logo.png?v=3" alt="Sprinto" className="h-8 w-auto object-contain bg-transparent" />
-              <span>Sprinto</span>
+            <Link href="/" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <img src="/sprinto-final.png?v=1" alt="Sprinto Logo - Your Court One Tap" className="h-10 w-auto object-contain bg-transparent" />
             </Link>
             <p className="mt-3 text-sm max-w-sm">
               Book premium sports courts across Klang Valley. Pickleball, Padel, Tennis, and more — all in one place.
@@ -62,7 +61,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-gray-800">
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Sprint. All rights reserved.
+            © {new Date().getFullYear()} Sprinto. All rights reserved.
           </p>
         </div>
       </div>

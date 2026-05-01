@@ -34,8 +34,8 @@ export function VendorNavSheet({ open, onOpenChange }: VendorNavSheetProps) {
         }}
       >
         <SheetHeader className="border-b border-slate-100 px-6 py-4 text-left">
-          <SheetTitle className="text-lg font-extrabold text-gray-900">
-            Sprint
+          <SheetTitle className="text-lg font-extrabold text-slate-800">
+            Sprinto
           </SheetTitle>
         </SheetHeader>
         <nav className="space-y-0.5 p-3">
